@@ -19,3 +19,4 @@ local.properties
 .classpath
 target/
 src/main/java/com/jazzchris/currencythrash/
+src/main/resources/application.properties
