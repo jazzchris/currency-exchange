@@ -1,8 +1,11 @@
 package com.jazzchris.currencyexchange;
 
+import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -71,7 +74,9 @@ public class CurrencyExchangeApplication {
 
 	@PostConstruct
 	public void setDatabase() {
+		List<Cash> entries = new ArrayList<>();
 		Arrays.asList(Currency.values()).stream()
-			.forEach(curr -> cashRepository.save(new Cash(curr, 20_000)));
+			.forEach(curr -> entries.add(new Cash(curr, BigDecimal.valueOf(20_000))));
+		cashRepository.saveAll(entries);
 	}
 }
