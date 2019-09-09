@@ -41,17 +41,15 @@ public class TransactionManager<E extends Enum<E> & Unitable> {
 		}
 	}
 
-	public String proceed(Transaction<E> transaction) {
-		if(!transaction.isHandleable()) {
-			return "Not enough money";
+	public Message proceed(Transaction<E> transaction) {
+		if (!transaction.isHandleable()) {
+			return new Message(FailMessage.FORBIDDEN.text, false);
 		}
-		else {
-			Transactions.subtractProduct(transaction.getFrom(), transaction.getProduct());
-			Transactions.addProduct(transaction.getTo(), transaction.getProduct());
-			Transactions.subtractProduct(transaction.getTo(), transaction.getPrice());
-			Transactions.addProduct(transaction.getFrom(), transaction.getPrice());
-			return "Success!";
-		}
+		Transactions.subtractProduct(transaction.getFrom(), transaction.getProduct());
+		Transactions.addProduct(transaction.getTo(), transaction.getProduct());
+		Transactions.subtractProduct(transaction.getTo(), transaction.getPrice());
+		Transactions.addProduct(transaction.getFrom(), transaction.getPrice());
+		return new Message("Success", true);
 	}
 	
 	public Optional<E> getSettlement() {
