@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -222,12 +223,25 @@ public class UsersWallet {
 		}
 	}
 	
-	public Map<Currency, Product<Currency>> collectAll() {
+	private Stream<Product<Currency>> streamCollect() {
 		return Arrays.asList(Currency.values()).stream().map(e -> Product.of(e, getByCurrency(e)))
-				.filter(d -> d.getValue() != null)
-				.collect(Collectors.toMap(Product::getProperty, p -> p));
+				.filter(d -> d.getValue() != null);
+	}
+	
+	public Map<Currency, Product<Currency>> collectAll() {
+		return streamCollect().collect(Collectors.toMap(Product::getProperty, p -> p));
 	}
 
+	public Map<Currency, Product<Currency>> collectIfValue() {
+		return streamCollect().filter(d -> d.getValue().compareTo(BigDecimal.ZERO) > 0)
+				.collect(Collectors.toMap(Product::getProperty, p -> p));
+	}
+	
+	public Map<Currency, Product<Currency>> collectForeign() {
+		return streamCollect().filter(k -> Currency.FOREIGN.containsValue(k.getProperty()))
+				.collect(Collectors.toMap(Product::getProperty, p -> p));
+	}
+	
 	@Override
 	public String toString() {
 		return "UsersWallet [id=" + id + ", usd=" + usd + ", eur=" + eur + ", chf=" + chf + ", rub=" + rub + ", czk="

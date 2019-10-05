@@ -9,6 +9,11 @@ public class Message {
 		this.textMessage = textMessage;
 		this.isSuccess = isSuccess;
 	}
+	
+	public Message(FailMessage failMessage) {
+		this.textMessage = failMessage.getText();
+		this.isSuccess = false;
+	}
 
 	public boolean isSuccess() {
 		return isSuccess;

@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jazzchris.currencyexchange.dao.RoleRepository;
 import com.jazzchris.currencyexchange.dao.UserRepository;
+import com.jazzchris.currencyexchange.dto.UserDto;
+import com.jazzchris.currencyexchange.dto.UserDtoConverter;
 import com.jazzchris.currencyexchange.entity.Role;
 import com.jazzchris.currencyexchange.entity.UserRegistration;
 import com.jazzchris.currencyexchange.entity.Users;
@@ -29,6 +31,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired private UserRepository userRepository;
 	@Autowired private RoleRepository roleRepository;
 	@Autowired private BCryptPasswordEncoder passwordEncoder;
+	private UserDtoConverter userDtoConverter = new UserDtoConverter();
 
 	@Override
 	public Optional<Users> findByUsername(String username) {
@@ -68,5 +71,10 @@ public class UserServiceImpl implements UserService {
 
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+	}
+
+	@Override
+	public UserDto findAndConvert(String username) {
+		return userDtoConverter.convert(findByUsername(username).get());
 	}
 }

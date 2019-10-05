@@ -43,7 +43,7 @@ public class TransactionManager<E extends Enum<E> & Unitable> {
 
 	public Message proceed(Transaction<E> transaction) {
 		if (!transaction.isHandleable()) {
-			return new Message(FailMessage.FORBIDDEN.text, false);
+			return new Message(FailMessage.FORBIDDEN);
 		}
 		Transactions.subtractProduct(transaction.getFrom(), transaction.getProduct());
 		Transactions.addProduct(transaction.getTo(), transaction.getProduct());

@@ -20,7 +20,7 @@ public class TransactionDetails implements TransactionCircs<Currency> {
 	
 	@Min(value=1, message="Not valid")
 	private int transUnits;
-	private LocalDateTime timeStamp;
+//	private LocalDateTime timeStamp;
 	
 	public TransactionDetails() {}
 
@@ -56,13 +56,13 @@ public class TransactionDetails implements TransactionCircs<Currency> {
 		this.transactionType = transactionType;
 	}
 	
-	public LocalDateTime getTimeStamp() {
-		return timeStamp;
-	}
-
-	public void setTimeStamp(LocalDateTime timeStamp) {
-		this.timeStamp = timeStamp;
-	}
+//	public LocalDateTime getTimeStamp() {
+//		return timeStamp;
+//	}
+//
+//	public void setTimeStamp(LocalDateTime timeStamp) {
+//		this.timeStamp = timeStamp;
+//	}
 
 	@Override
 	public String toString() {

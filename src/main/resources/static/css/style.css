@@ -17,6 +17,10 @@ input {
 	float:right;
 }
 
+#success-info {
+	display: none;
+}
+
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
