@@ -3,7 +3,7 @@ HELP.md
 !.mvn/wrapper/maven-wrapper.jar
 
 
-
+.idea/
 .metadata
 bin/
 tmp/

@@ -36,6 +36,7 @@ public class StocksHolder implements PropertyChangeListener {
 	}
 	
 	public Map<LocalDateTime, Quotations> getHistoryStocks() {
-		return Map.copyOf(historyStocks);
+		//return Map.copyOf(historyStocks);
+		return historyStocks;
 	}
 }
