@@ -24,8 +24,11 @@ import com.jazzchris.currencyexchange.entity.Cash;
 import com.jazzchris.currencyexchange.stock.Currency;
 import com.jazzchris.currencyexchange.stock.Stocks;
 import com.jazzchris.currencyexchange.ws.client.CurrencyWebSocketHandler;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication
+@EnableCaching
+@EnableAspectJAutoProxy
 public class CurrencyExchangeApplication {
 
 	@Autowired

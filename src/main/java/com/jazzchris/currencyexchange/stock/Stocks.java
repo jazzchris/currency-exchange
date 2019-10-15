@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.jazzchris.currencyexchange.core.Quotations;
@@ -41,6 +42,7 @@ public class Stocks implements Quotations {
 	}
 
 	@Override
+	@JsonIgnore
 	public Map<String, Prices> getAllItems() {
 		Map<String, Prices> allItems = new HashMap<>();
 		items.forEach((k, v) -> allItems.put(k.name(), v));
