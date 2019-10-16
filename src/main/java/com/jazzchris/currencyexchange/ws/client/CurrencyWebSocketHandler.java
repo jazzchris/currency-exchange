@@ -6,6 +6,7 @@ import java.beans.PropertyChangeSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.messaging.core.MessageSendingOperations;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -28,15 +29,15 @@ public class CurrencyWebSocketHandler extends TextWebSocketHandler {
 	private PropertyChangeSupport support;
 	private Stocks stocks;
 	
-	@Autowired
-	public CurrencyWebSocketHandler(MessageSendingOperations<String> messagingTemplate) {
+
+	public CurrencyWebSocketHandler(@Autowired @Qualifier("brokerMessagingTemplate") MessageSendingOperations messagingTemplate) {
 		this.messagingTemplate = messagingTemplate;
 		support = new PropertyChangeSupport(this);
 	}
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		logger.info("WebSocket message recieved");
+		logger.info("WebSocket message received");
 		currentMessage = message;
 		Stocks stocks = decoder.decode(message.getPayload());
 		logger.info("WS actual publication date: " + stocks.getPublicationDate());

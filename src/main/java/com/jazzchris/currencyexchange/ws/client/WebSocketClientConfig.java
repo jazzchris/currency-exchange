@@ -19,7 +19,7 @@ public class WebSocketClientConfig {
 	@Autowired
 	@Qualifier("currencyWebSocketHandler")
 	private WebSocketHandler handler;
-	
+
 	@Bean
 	public WebSocketClient webSocketClient() {
 		return new StandardWebSocketClient();
