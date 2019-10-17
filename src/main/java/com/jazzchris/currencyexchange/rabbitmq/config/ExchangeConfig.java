@@ -15,6 +15,14 @@ public class ExchangeConfig {
     @Value("${exchange.direct}")
     private String directExchange;
 
+    @Value("${exchange.direct.user}")
+    private String directUserExchange;
+
+    @Bean
+    public DirectExchange directUserExchange() {
+        return new DirectExchange(directUserExchange);
+    }
+
     @Bean
     public TopicExchange topicExchange() {
         return new TopicExchange(topicExchange);

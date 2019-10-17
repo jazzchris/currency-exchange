@@ -1,18 +1,11 @@
 package com.jazzchris.currencyexchange.entity;
 
-import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import java.util.Collection;
+import java.util.List;
+
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 @Entity
@@ -48,6 +41,10 @@ public class Users {
 		joinColumns = @JoinColumn(name = "users_id"), 
 		inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Collection<Role> roles;
+
+	@OneToMany(mappedBy="users")
+	@JsonManagedReference
+	private List<FutureOrder> futureOrder;
 	
 	public Users() {}
 	
@@ -114,5 +111,13 @@ public class Users {
 
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
+	}
+
+	public List<FutureOrder> getFutureOrder() {
+		return futureOrder;
+	}
+
+	public void setFutureOrder(List<FutureOrder> futureOrder) {
+		this.futureOrder = futureOrder;
 	}
 }

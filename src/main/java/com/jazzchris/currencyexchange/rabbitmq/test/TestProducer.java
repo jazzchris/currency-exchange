@@ -30,6 +30,6 @@ public class TestProducer {
     @GetMapping("/direct-exchange/{routingKey}")
     public String sendToDirectExchange(@PathVariable("routingKey") String key, @RequestParam("message") String message) {
         rabbitTemplate.convertAndSend(directExchange, key, message);
-        return String.format("Message %s sent! topicExchange name: %s, key: %s", message, topicExchange, key);
+        return String.format("Message %s sent! topicExchange name: %s, key: %s", message, directExchange, key);
     }
 }

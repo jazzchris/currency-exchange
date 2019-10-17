@@ -20,6 +20,18 @@ public class QueueConfig {
     @Value("${queue.D}")
     private String queueD;
 
+    @Value("${queue.user}")
+    private String queueUser;
+
+    @Value("${queue.stocks}")
+    private String queueStocks;
+
+    @Bean
+    public Queue queueStocks() { return new Queue(queueStocks); }
+
+    @Bean
+    public Queue queueUser() { return new Queue(queueUser); }
+
     @Bean
     public Queue queueA() {
         return new Queue(queueA);
