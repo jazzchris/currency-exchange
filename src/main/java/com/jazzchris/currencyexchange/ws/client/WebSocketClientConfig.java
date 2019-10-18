@@ -10,7 +10,7 @@ import org.springframework.web.socket.client.WebSocketClient;
 import org.springframework.web.socket.client.WebSocketConnectionManager;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 
-@Configuration
+//@Configuration
 public class WebSocketClientConfig {
 	
 	@Value("${currency.websocket}")

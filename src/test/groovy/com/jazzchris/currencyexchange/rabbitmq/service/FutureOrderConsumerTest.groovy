@@ -34,7 +34,7 @@ class FutureOrderConsumerTest extends Specification {
             prices.purchasePrice = 4.000
             prices.sellPrice = 5.000
         expect:
-            FutureOrderConsumerImpl.isAcceptable(sellOrder, prices)
-            FutureOrderConsumerImpl.isAcceptable(buyOrder, prices)
+            !FutureOrderConsumerImpl.isAcceptable(sellOrder, prices)
+            !FutureOrderConsumerImpl.isAcceptable(buyOrder, prices)
     }
 }

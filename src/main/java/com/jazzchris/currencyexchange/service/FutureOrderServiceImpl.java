@@ -41,6 +41,11 @@ public class FutureOrderServiceImpl implements FutureOrderService {
     }
 
     @Override
+    public void save(FutureOrder futureOrder) {
+        futureOrderRepository.save(futureOrder);
+    }
+
+    @Override
     public void save(Users user, TransactionDetails details) {
         FutureOrder order = convert(user, details, Status.AWAIT);
         futureOrderRepository.save(order);
@@ -56,7 +61,8 @@ public class FutureOrderServiceImpl implements FutureOrderService {
         return futureOrderRepository.findById(id);
     }
 
-    private FutureOrder convert(Users user, TransactionDetails details, Status status) {
+
+    public FutureOrder convert(Users user, TransactionDetails details, Status status) {
         FutureOrder order = new FutureOrder();
         order.setUsers(user);
         order.setCurrency(details.getCurrency());
@@ -66,4 +72,6 @@ public class FutureOrderServiceImpl implements FutureOrderService {
         order.setStatus(status);
         return order;
     }
+
+
 }

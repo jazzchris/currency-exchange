@@ -19,6 +19,8 @@ public interface FutureOrderService {
 
     FutureOrder findFirstByUser(Users users);
 
+    void save(FutureOrder futureOrder);
+
     void save(Users user, TransactionDetails details);
 
     List<FutureOrder> findAll();

@@ -1,5 +1,6 @@
 package com.jazzchris.currencyexchange.stock;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -10,7 +11,7 @@ import com.jazzchris.currencyexchange.core.TransactionType;
  *
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Prices {
+public class Prices implements Serializable {
 
 	private BigDecimal purchasePrice;
 	private BigDecimal sellPrice;
@@ -24,7 +25,7 @@ public class Prices {
 		this.averagePrice = averagePrice;
 	}
 	
-	public BigDecimal getPrice(TransactionType type) {
+	public BigDecimal getFor(TransactionType type) {
 		switch(type) {
 		case BUY:	return getSellPrice();
 		case SELL:	return getPurchasePrice();

@@ -17,6 +17,22 @@ public class BindingConfig {
     @Value("${routing.direct.b}")
     private String directRoutingB;
 
+    @Value("${routing.stocks}")
+    private String stockRouting;
+
+    @Value("${routing.stocks.beta}")
+    private String stockRoutingBeta;
+
+    @Bean
+    public Binding bindingStockBeta(DirectExchange directStocksExchange, Queue queueStocksBeta) {
+        return BindingBuilder.bind(queueStocksBeta).to(directStocksExchange).with(stockRoutingBeta);
+    }
+
+    @Bean
+    public Binding bindingStock(DirectExchange directStocksExchange, Queue queueStocks) {
+        return BindingBuilder.bind(queueStocks).to(directStocksExchange).with(stockRouting);
+    }
+
     @Bean
     public Binding bindingQueueA(TopicExchange topicExchange, Queue queueA) {
         return BindingBuilder.bind(queueA).to(topicExchange).with(topicRoutingKey);

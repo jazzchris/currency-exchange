@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.core.MessageSendingOperations;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -16,14 +17,17 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.jazzchris.currencyexchange.stock.Stocks;
 
-@Component
+//@Component
 public class CurrencyWebSocketHandler extends TextWebSocketHandler {
 
 	private static Logger logger = LoggerFactory.getLogger(CurrencyWebSocketHandler.class);
 
 	private MessageDecoder decoder = new MessageDecoder();
 	private final MessageSendingOperations<String> messagingTemplate;
-	private final String destination = "/topic/price";
+
+	@Value("${client.topic}")
+	private String destination;
+
 	private TextMessage currentMessage;
 	
 	private PropertyChangeSupport support;

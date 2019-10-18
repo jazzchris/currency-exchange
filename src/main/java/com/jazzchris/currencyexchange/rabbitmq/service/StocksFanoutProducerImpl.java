@@ -13,20 +13,15 @@ public class StocksFanoutProducerImpl implements StocksFanoutProducer {
 
     private static final Logger logger = LoggerFactory.getLogger(StocksFanoutProducer.class);
 
-    @Value("${exchange.direct.user}")
-    private String directUserExchange;
+    @Value("${exchange.direct.stocks}")
+    private String directStocksExchange;
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
     @Override
-    public void sendStocksToTransact(Stocks message, String key) {
-        rabbitTemplate.convertAndSend(directUserExchange, key, message);
-        logger.info("Sent new Stocks to queue: " + message.getPublicationDate());
-    }
-
-    @Override
-    public String allertUsers(Stocks message, String key) {
-        return null;
+    public void sendStocksToTransact(String message, String key) {
+        rabbitTemplate.convertAndSend(directStocksExchange, key, message);
+        logger.info("PRODUCER: new stocks received with date: " + message);
     }
 }

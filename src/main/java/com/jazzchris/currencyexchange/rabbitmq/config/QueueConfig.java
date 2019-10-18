@@ -20,17 +20,17 @@ public class QueueConfig {
     @Value("${queue.D}")
     private String queueD;
 
-    @Value("${queue.user}")
-    private String queueUser;
-
     @Value("${queue.stocks}")
     private String queueStocks;
 
-    @Bean
-    public Queue queueStocks() { return new Queue(queueStocks); }
+    @Value("${queue.stocks.beta}")
+    private String queueStocksBeta;
 
     @Bean
-    public Queue queueUser() { return new Queue(queueUser); }
+    public Queue queueStocksBeta() { return new Queue(queueStocksBeta); }
+
+    @Bean
+    public Queue queueStocks() { return new Queue(queueStocks); }
 
     @Bean
     public Queue queueA() {

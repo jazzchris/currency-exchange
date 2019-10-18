@@ -34,7 +34,7 @@ public class CurrencyExchangeApplication {
 	@Autowired
 	private CashRepository cashRepository;
 	
-	@Autowired
+//	@Autowired
 	private CurrencyWebSocketHandler webSocketHandler;
 	
 	@Value("${currency.http}") 
@@ -71,7 +71,7 @@ public class CurrencyExchangeApplication {
 		return new StocksHolder();
 	}
 	
-	@PostConstruct
+//	@PostConstruct
 	public void setChannelListener() {
 		webSocketHandler.addPropertyChangeListener(stocksHolder());
 	}

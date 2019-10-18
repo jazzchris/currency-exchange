@@ -5,7 +5,5 @@ import com.jazzchris.currencyexchange.stock.Stocks;
 
 public interface StocksFanoutProducer {
 
-    void sendStocksToTransact(Stocks message, String key);
-
-    String allertUsers(Stocks message, String key);
+    void sendStocksToTransact(String message, String key);
 }

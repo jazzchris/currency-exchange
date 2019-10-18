@@ -1,5 +1,6 @@
 package com.jazzchris.currencyexchange.stock;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.jazzchris.currencyexchange.core.Quotations;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Stocks implements Quotations {
+public class Stocks implements Quotations, Serializable {
 
 	private LocalDateTime publicationDate;
 	

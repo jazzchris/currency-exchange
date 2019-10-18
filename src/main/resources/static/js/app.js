@@ -7,19 +7,17 @@ function connect() {
     stompClient.connect({}, function (frame) {
         stompClient.subscribe('/topic/price', function (stocks) {
     		var json = JSON.parse(stocks.body);
-    		$("#publicationDate").text(json.PublicationDate);
-    		var items = json.Items;
-    		var id;
+    		$("#publicationDate").text(json.publicationDate);
+    		var items = json.items;
     		var currentRow;
     		for(var i in items) {
-    			id = items[i].Code;
-    			currentRow = $("#buy-row-"+id);
+    			currentRow = $("#buy-row-"+i);
     			if (currentRow.length) {
-    				currentRow.find(".sell").val(items[i].SellPrice);
+    				currentRow.find(".sell").val(items[i].sellPrice);
     			}
-    			currentRow = $("#sell-row-"+id);
+    			currentRow = $("#sell-row-"+i);
     			if (currentRow.length) {
-    				currentRow.find(".buy").val(items[i].PurchasePrice);
+    				currentRow.find(".buy").val(items[i].purchasePrice);
     				count(currentRow);
     			}
     		}

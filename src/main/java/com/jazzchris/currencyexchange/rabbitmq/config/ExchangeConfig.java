@@ -15,12 +15,12 @@ public class ExchangeConfig {
     @Value("${exchange.direct}")
     private String directExchange;
 
-    @Value("${exchange.direct.user}")
-    private String directUserExchange;
+    @Value("${exchange.direct.stocks}")
+    private String directStocksExchange;
 
     @Bean
-    public DirectExchange directUserExchange() {
-        return new DirectExchange(directUserExchange);
+    public DirectExchange directStocksExchange() {
+        return new DirectExchange(directStocksExchange);
     }
 
     @Bean
