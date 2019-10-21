@@ -19,7 +19,7 @@ public class ScheduledStock {
 
     @Scheduled(fixedRate = 60000, initialDelay = 10000)
     public Stocks getScheduledStocks() {
-        logger.info("SCHEDULED retrieve");
+        logger.info("Refreshing stocks by scheduler");
         return stockServiceCacheImpl.getStocks();
     }
 }

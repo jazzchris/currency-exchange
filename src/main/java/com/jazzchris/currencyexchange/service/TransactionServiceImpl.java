@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
 
+import com.jazzchris.currencyexchange.entity.FutureOrder;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,11 @@ public class TransactionServiceImpl implements TransactionService {
 			}
 		}
 		throw new IllegalArgumentException("Unexpected transaction");
+	}
+
+	@Override
+	public String proceedFuture(FutureOrder futureOrder, Prices prices) {
+		return null;
 	}
 
 	/**

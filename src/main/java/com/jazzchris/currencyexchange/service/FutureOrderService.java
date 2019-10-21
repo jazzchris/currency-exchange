@@ -13,7 +13,9 @@ public interface FutureOrderService {
 
     List<FutureOrder> findAllByUser(Users users);
 
-    List<FutureOrder> findAllByStatus(Status status);
+    //List<FutureOrder> findAllByStatus(Status status);
+
+    List<FutureOrder> findAllAwaited();
 
     List<FutureOrder> findAllByCurrency(Currency currency);
 

@@ -7,6 +7,8 @@ import com.jazzchris.currencyexchange.http.client.StocksProvider;
 import com.jazzchris.currencyexchange.service.StockService;
 import com.jazzchris.currencyexchange.stock.Stocks;
 import com.jazzchris.currencyexchange.ws.client.MessageDecoder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RatingsConsumer {
 
+    private static final Logger logger = LoggerFactory.getLogger(RatingsConsumer.class);
     private final MessageSendingOperations<String> messagingTemplate;
 
     @Autowired
@@ -24,9 +27,6 @@ public class RatingsConsumer {
 
     @Autowired
     private StockService stockServiceCacheImpl;
-
-//    @Autowired
-//    WebSocketController controller;
 
     @Value("${client.topic}")
     private String destination;
@@ -37,10 +37,9 @@ public class RatingsConsumer {
 
     @RabbitListener(queues = "${queue.stocks.beta}")
     public void ratingsMessage(String message) throws JsonProcessingException {
-        System.out.println("CONSUMER 2 also received message");
+        logger.info("Sending new stocks to customers");
         Stocks stocks = stockServiceCacheImpl.getStocks();
-        String foo = objectMapper.writeValueAsString(stocks);
-        messagingTemplate.convertAndSend(destination, foo);
-        //controller.send();
+        messagingTemplate.convertAndSend(destination, objectMapper.writeValueAsString(stocks));
+
     }
 }

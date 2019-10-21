@@ -34,6 +34,10 @@ public class ItemsDeserializer extends StdDeserializer<HashMap<Currency, Prices>
 				JsonNode purchasePrice = Optional.ofNullable(n.get("purchasePrice")).orElse(n.get("PurchasePrice"));
 				JsonNode sellPrice = Optional.ofNullable(n.get("sellPrice")).orElse(n.get("SellPrice"));
 				JsonNode averagePrice = Optional.ofNullable(n.get("averagePrice")).orElse(n.get("AveragePrice"));
+//				JsonNode curr = n.get("code");
+//				JsonNode purchasePrice = n.get("purchasePrice");
+//				JsonNode sellPrice = n.get("sellPrice");
+//				JsonNode averagePrice = n.get("averagePrice");
 				deserialized.put(Currency.valueOf(curr.asText()), new Prices(purchasePrice.decimalValue(),
 						sellPrice.decimalValue(), averagePrice.decimalValue()));
 			}

@@ -1,9 +1,6 @@
 package com.jazzchris.currencyexchange.dao;
 
-import com.jazzchris.currencyexchange.entity.Cash;
-import com.jazzchris.currencyexchange.entity.FutureOrder;
-import com.jazzchris.currencyexchange.entity.Status;
-import com.jazzchris.currencyexchange.entity.Users;
+import com.jazzchris.currencyexchange.entity.*;
 import com.jazzchris.currencyexchange.stock.Currency;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -15,7 +12,9 @@ public interface FutureOrderRepository extends JpaRepository<FutureOrder, Intege
 
     FutureOrder findFirstByUsers(Users users);
 
-    List<FutureOrder> findAllByStatus(Status status);
+    //List<FutureOrder> findAllByStatus(Status status);
 
-    List<FutureOrder> findAllByCurrency(Currency currency);
+    List<FutureOrder> findAllByTransactionDetailsCurrency(Currency currency);
+
+    List<FutureOrder> findAllByOrder(Order order);
 }

@@ -15,7 +15,5 @@ public interface TransactionCircs<E extends Enum<E> & Unitable> {
 	public int getTransUnits();
 
 	public TransactionType getTransactionType();
-	
-	public LocalDateTime getTimeStamp();
 
 }

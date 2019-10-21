@@ -5,7 +5,7 @@ import org.flywaydb.core.api.migration.Context;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
-public class V1_3__create_table_cash extends BaseJavaMigration {
+public class V1_3__create_table_role extends BaseJavaMigration {
 
 	@Override
 	public void migrate(Context context) throws Exception {

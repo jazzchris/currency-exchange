@@ -8,7 +8,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-public class FutureOrder {
+@Table(name="orders")
+public class Order {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -19,10 +20,6 @@ public class FutureOrder {
     @JoinColumn(name="users_id", nullable=false)
     @JsonBackReference
     private Users users;
-
-    public void setTransactionDetails(TransactionDetails transactionDetails) {
-        this.transactionDetails = transactionDetails;
-    }
 
     @Embedded
     private TransactionDetails transactionDetails;
@@ -37,25 +34,17 @@ public class FutureOrder {
 //    @Column(name="amount")
 //    private BigDecimal amount;
 //
-//    @Column(name="transType")
+//    @Column(name="type")
 //    @Enumerated(EnumType.STRING)
-//    private TransactionType transType;
+//    private TransactionType type;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="order_id")
-    private Order order;
-
-//    @Column(name="status")
-//    @Enumerated(EnumType.STRING)
-//    private Status status;
-
-    public FutureOrder() {}
+    public Order() {}
 
     public int getId() {
         return id;
     }
 
-    public void setOrderId(int orderId) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -67,12 +56,12 @@ public class FutureOrder {
         this.users = users;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public TransactionDetails getTransactionDetails() {
         return transactionDetails;
+    }
+
+    public void setTransactionDetails(TransactionDetails transactionDetails) {
+        this.transactionDetails = transactionDetails;
     }
 
 //    public Currency getCurrency() {
@@ -99,39 +88,11 @@ public class FutureOrder {
 //        this.amount = amount;
 //    }
 //
-//    public TransactionType getTransType() {
-//        return transType;
+//    public TransactionType getType() {
+//        return type;
 //    }
 //
-//    public void setTransType(TransactionType transType) {
-//        this.transType = transType;
+//    public void setType(TransactionType type) {
+//        this.type = type;
 //    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-//    public Status getStatus() {
-//        return status;
-//    }
-//
-//    public void setStatus(Status status) {
-//        this.status = status;
-//    }
-
-    @Override
-    public String toString() {
-        return "FutureOrder{" +
-                "id=" + id +
-                ", users=" + users +
-                ", transactionDetails=" + transactionDetails +
-//                ", rate=" + rate +
-//                ", amount=" + amount +
-//                ", transType=" + transType +
-                ", order=" + order +
-                '}';
-    }
 }

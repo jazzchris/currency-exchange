@@ -42,8 +42,7 @@ public class MainController {
 			return "main";
 		}
 		System.err.println("proceed Buy: " + details.getTransactionType());
-		details.setTimeStamp(LocalDateTime.now(Clock.systemUTC()));
-		logger.info("Buy request at: " + details.getTimeStamp());
+		logger.info("Buy request at: " + LocalDateTime.now());
 		logger.info("Buying price: " + details.getUnitPrice() + details.getCurrency() + " by: " + auth.getName());
 		String result = transactionService.proceedUnchecked(auth.getName(), details);
 		redirectAttributes.addFlashAttribute("result", result);
@@ -56,8 +55,7 @@ public class MainController {
 			return "main";
 		}
 		System.err.println("proceed Sell: " + details.getTransactionType());
-		details.setTimeStamp(LocalDateTime.now(Clock.systemUTC()));
-		logger.info("Sell request at: " + details.getTimeStamp());
+		logger.info("Sell request at: " + LocalDateTime.now());
 		logger.info("Selling price: " + details.getUnitPrice() + details.getCurrency() + " by: " + auth.getName());
 		String result = transactionService.proceedUnchecked(auth.getName(), details);
 		redirectAttributes.addFlashAttribute("result", result);

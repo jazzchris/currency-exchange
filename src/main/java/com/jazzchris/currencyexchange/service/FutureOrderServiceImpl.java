@@ -26,13 +26,18 @@ public class FutureOrderServiceImpl implements FutureOrderService {
     }
 
     @Override
-    public List<FutureOrder> findAllByStatus(Status status) {
-        return futureOrderRepository.findAllByStatus(status);
+    public List<FutureOrder> findAllAwaited() {
+        return futureOrderRepository.findAllByOrder(null);
     }
+
+//    @Override
+ //   public List<FutureOrder> findAllByStatus(Status status) {
+ //       return futureOrderRepository.findAllByStatus(status);
+ //   }
 
     @Override
     public List<FutureOrder> findAllByCurrency(Currency currency) {
-        return futureOrderRepository.findAllByCurrency(currency);
+        return futureOrderRepository.findAllByTransactionDetailsCurrency(currency);
     }
 
     @Override
@@ -47,8 +52,8 @@ public class FutureOrderServiceImpl implements FutureOrderService {
 
     @Override
     public void save(Users user, TransactionDetails details) {
-        FutureOrder order = convert(user, details, Status.AWAIT);
-        futureOrderRepository.save(order);
+//        FutureOrder order = convert(user, details, Status.AWAIT);
+//        futureOrderRepository.save(order);
     }
 
     @Override
@@ -62,16 +67,16 @@ public class FutureOrderServiceImpl implements FutureOrderService {
     }
 
 
-    public FutureOrder convert(Users user, TransactionDetails details, Status status) {
-        FutureOrder order = new FutureOrder();
-        order.setUsers(user);
-        order.setCurrency(details.getCurrency());
-        order.setAmount(BigDecimal.valueOf(details.getTransUnits()));
-        order.setRate(details.getUnitPrice());
-        order.setTransType(details.getTransactionType());
-        order.setStatus(status);
-        return order;
-    }
+//    public FutureOrder convert(Users user, TransactionDetails details, Status status) {
+//        FutureOrder order = new FutureOrder();
+//        order.setUsers(user);
+//        order.setCurrency(details.getCurrency());
+//        order.setAmount(BigDecimal.valueOf(details.getTransUnits()));
+//        order.setRate(details.getUnitPrice());
+//        order.setTransType(details.getTransactionType());
+//        order.setOrder(null);
+//        return order;
+//    }
 
 
 }

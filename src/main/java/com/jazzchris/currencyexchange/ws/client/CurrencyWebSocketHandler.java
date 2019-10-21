@@ -34,8 +34,8 @@ public class CurrencyWebSocketHandler extends TextWebSocketHandler {
 	private Stocks stocks;
 	
 
-	public CurrencyWebSocketHandler(@Autowired @Qualifier("brokerMessagingTemplate") MessageSendingOperations messagingTemplate) {
-		this.messagingTemplate = messagingTemplate;
+	public CurrencyWebSocketHandler(@Autowired MessageSendingOperations brokerMessagingTemplate) {
+		this.messagingTemplate = brokerMessagingTemplate;
 		support = new PropertyChangeSupport(this);
 	}
 	

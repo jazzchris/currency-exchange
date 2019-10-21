@@ -3,6 +3,10 @@ package com.jazzchris.currencyexchange.entity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Min;
 
 import com.jazzchris.currencyexchange.core.TransactionCircs;
@@ -12,15 +16,23 @@ import com.jazzchris.currencyexchange.stock.Currency;
 /**
  * class keeps details about BUY and SELL transactions
  */
+@Embeddable
 public class TransactionDetails implements TransactionCircs<Currency> {
 
+	@Column(name="rate")
 	private BigDecimal unitPrice;
+
+	@Column(name="currency")
+	@Enumerated(EnumType.STRING)
 	private Currency currency;
+
+	@Column(name="transType")
+	@Enumerated(EnumType.STRING)
 	private TransactionType transactionType;
-	
+
+	@Column(name="amount")
 	@Min(value=1, message="Not valid")
 	private int transUnits;
-	private LocalDateTime timeStamp;
 	
 	public TransactionDetails() {}
 
@@ -54,14 +66,6 @@ public class TransactionDetails implements TransactionCircs<Currency> {
 
 	public void setTransactionType(TransactionType transactionType) {
 		this.transactionType = transactionType;
-	}
-	
-	public LocalDateTime getTimeStamp() {
-		return timeStamp;
-	}
-
-	public void setTimeStamp(LocalDateTime timeStamp) {
-		this.timeStamp = timeStamp;
 	}
 
 	@Override
