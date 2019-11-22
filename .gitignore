@@ -20,3 +20,5 @@ local.properties
 target/
 src/main/java/com/jazzchris/currencythrash/
 src/main/resources/application.properties
+/docker/
+/src/main/resources/api-v1.json

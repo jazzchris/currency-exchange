@@ -1,11 +1,7 @@
 package com.jazzchris.currencyexchange.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.jazzchris.currencyexchange.core.TransactionType;
-import com.jazzchris.currencyexchange.stock.Currency;
-
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 public class FutureOrder {
@@ -27,27 +23,9 @@ public class FutureOrder {
     @Embedded
     private TransactionDetails transactionDetails;
 
-//    @Column(name="currency")
-//    @Enumerated(EnumType.STRING)
-//    private Currency currency;
-//
-//    @Column(name="rate")
-//    private BigDecimal rate;
-//
-//    @Column(name="amount")
-//    private BigDecimal amount;
-//
-//    @Column(name="transType")
-//    @Enumerated(EnumType.STRING)
-//    private TransactionType transType;
-
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="order_id")
     private Order order;
-
-//    @Column(name="status")
-//    @Enumerated(EnumType.STRING)
-//    private Status status;
 
     public FutureOrder() {}
 
@@ -75,38 +53,6 @@ public class FutureOrder {
         return transactionDetails;
     }
 
-//    public Currency getCurrency() {
-//        return currency;
-//    }
-//
-//    public void setCurrency(Currency currency) {
-//        this.currency = currency;
-//    }
-//
-//    public BigDecimal getRate() {
-//        return rate;
-//    }
-//
-//    public void setRate(BigDecimal rate) {
-//        this.rate = rate;
-//    }
-//
-//    public BigDecimal getAmount() {
-//        return amount;
-//    }
-//
-//    public void setAmount(BigDecimal amount) {
-//        this.amount = amount;
-//    }
-//
-//    public TransactionType getTransType() {
-//        return transType;
-//    }
-//
-//    public void setTransType(TransactionType transType) {
-//        this.transType = transType;
-//    }
-
     public Order getOrder() {
         return order;
     }
@@ -114,13 +60,6 @@ public class FutureOrder {
     public void setOrder(Order order) {
         this.order = order;
     }
-//    public Status getStatus() {
-//        return status;
-//    }
-//
-//    public void setStatus(Status status) {
-//        this.status = status;
-//    }
 
     @Override
     public String toString() {
@@ -128,9 +67,6 @@ public class FutureOrder {
                 "id=" + id +
                 ", users=" + users +
                 ", transactionDetails=" + transactionDetails +
-//                ", rate=" + rate +
-//                ", amount=" + amount +
-//                ", transType=" + transType +
                 ", order=" + order +
                 '}';
     }

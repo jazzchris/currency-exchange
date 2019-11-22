@@ -34,8 +34,9 @@ public class StockServiceCacheImpl implements StockService {
     @PostConstruct
     public void init() {
         this.stocksBefore = stocksProvider.fetch();
-        producer.sendStocksToTransact(stocksBefore.getPublicationDate().toString(), routingStocks);
-        producer.sendStocksToTransact(stocksBefore.getPublicationDate().toString(), routingStocksBeta);
+        fanout();
+//        producer.sendStocksToTransact(stocksBefore.getPublicationDate().toString(), routingStocks);
+//        producer.sendStocksToTransact(stocksBefore.getPublicationDate().toString(), routingStocksBeta);
     }
 
     @Override
@@ -44,10 +45,16 @@ public class StockServiceCacheImpl implements StockService {
         logger.info("Stocks Cache is expired. Receiving new stocks");
         Stocks stocksAfter = stocksProvider.fetch();
         if (stocksAfter.getPublicationDate().isAfter(stocksBefore.getPublicationDate())) {
-            producer.sendStocksToTransact(stocksAfter.getPublicationDate().toString(), routingStocks);
-            producer.sendStocksToTransact(stocksAfter.getPublicationDate().toString(), routingStocksBeta);
+            fanout();
+//            producer.sendStocksToTransact(stocksAfter.getPublicationDate().toString(), routingStocks);
+//            producer.sendStocksToTransact(stocksAfter.getPublicationDate().toString(), routingStocksBeta);
             stocksBefore = stocksAfter;
         }
         return stocksAfter;
+    }
+
+    private void fanout() {
+        producer.sendStocksToTransact(stocksBefore.getPublicationDate().toString(), routingStocks);
+        producer.sendStocksToTransact(stocksBefore.getPublicationDate().toString(), routingStocksBeta);
     }
 }

@@ -2,15 +2,12 @@ package com.jazzchris.currencyexchange.service;
 
 import com.jazzchris.currencyexchange.dao.FutureOrderRepository;
 import com.jazzchris.currencyexchange.entity.FutureOrder;
-import com.jazzchris.currencyexchange.entity.Status;
 import com.jazzchris.currencyexchange.entity.TransactionDetails;
 import com.jazzchris.currencyexchange.entity.Users;
 import com.jazzchris.currencyexchange.stock.Currency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,11 +26,6 @@ public class FutureOrderServiceImpl implements FutureOrderService {
     public List<FutureOrder> findAllAwaited() {
         return futureOrderRepository.findAllByOrder(null);
     }
-
-//    @Override
- //   public List<FutureOrder> findAllByStatus(Status status) {
- //       return futureOrderRepository.findAllByStatus(status);
- //   }
 
     @Override
     public List<FutureOrder> findAllByCurrency(Currency currency) {
@@ -65,18 +57,4 @@ public class FutureOrderServiceImpl implements FutureOrderService {
     public Optional<FutureOrder> findById(int id) {
         return futureOrderRepository.findById(id);
     }
-
-
-//    public FutureOrder convert(Users user, TransactionDetails details, Status status) {
-//        FutureOrder order = new FutureOrder();
-//        order.setUsers(user);
-//        order.setCurrency(details.getCurrency());
-//        order.setAmount(BigDecimal.valueOf(details.getTransUnits()));
-//        order.setRate(details.getUnitPrice());
-//        order.setTransType(details.getTransactionType());
-//        order.setOrder(null);
-//        return order;
-//    }
-
-
 }

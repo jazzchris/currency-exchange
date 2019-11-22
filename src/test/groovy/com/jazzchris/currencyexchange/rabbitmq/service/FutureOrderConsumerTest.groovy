@@ -2,7 +2,6 @@ package com.jazzchris.currencyexchange.rabbitmq.service
 
 import com.jazzchris.currencyexchange.core.TransactionType
 import com.jazzchris.currencyexchange.entity.FutureOrder
-import com.jazzchris.currencyexchange.entity.Status
 import com.jazzchris.currencyexchange.entity.TransactionDetails
 import com.jazzchris.currencyexchange.stock.Currency
 import com.jazzchris.currencyexchange.stock.Prices

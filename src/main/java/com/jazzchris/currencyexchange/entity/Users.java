@@ -1,6 +1,9 @@
 package com.jazzchris.currencyexchange.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Collection;
 import java.util.List;
@@ -9,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 @Entity
+@ApiModel
 public class Users {
 
 	@Id
@@ -17,15 +21,19 @@ public class Users {
 	private int id;
 	
 	@Column(name="username")
+	@ApiModelProperty(example = "john")
 	private String username;
 	
 	@Column(name="first_name")
+	@ApiModelProperty(value = "First name", example = "John")
 	private String firstName;
 	
 	@Column(name="last_name")
+	@ApiModelProperty(value = "Last name", example = "Doe")
 	private String lastName;
 	
 	@Column(name="password")
+	@JsonIgnore
 	private String password;
 	
 	@Column(name="email")
@@ -45,9 +53,12 @@ public class Users {
 	@OneToMany(mappedBy="users")
 	@JsonManagedReference
 	private List<FutureOrder> futureOrder;
+
+	@OneToMany(mappedBy="users")
+	@JsonManagedReference
+	private List<Order> orders;
 	
 	public Users() {}
-	
 
 	public int getId() {
 		return id;
@@ -119,5 +130,13 @@ public class Users {
 
 	public void setFutureOrder(List<FutureOrder> futureOrder) {
 		this.futureOrder = futureOrder;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 }

@@ -1,7 +1,6 @@
 package com.jazzchris.currencyexchange.service;
 
 import com.jazzchris.currencyexchange.entity.FutureOrder;
-import com.jazzchris.currencyexchange.entity.Status;
 import com.jazzchris.currencyexchange.entity.TransactionDetails;
 import com.jazzchris.currencyexchange.entity.Users;
 import com.jazzchris.currencyexchange.stock.Currency;

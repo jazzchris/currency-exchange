@@ -3,7 +3,6 @@ package com.jazzchris.currencyexchange.rabbitmq.service;
 import com.jazzchris.currencyexchange.core.TransactionType;
 import com.jazzchris.currencyexchange.entity.FutureOrder;
 import com.jazzchris.currencyexchange.entity.Order;
-import com.jazzchris.currencyexchange.entity.Status;
 import com.jazzchris.currencyexchange.entity.TransactionDetails;
 import com.jazzchris.currencyexchange.service.FutureOrderService;
 import com.jazzchris.currencyexchange.service.OrderService;
@@ -31,9 +30,6 @@ public class FutureOrderConsumerImpl implements FutureOrderConsumer {
     private FutureOrderService futureOrderService;
 
     @Autowired
-    private OrderService orderService;
-
-    @Autowired
     private TransactionService transactionService;
 
     @Autowired
@@ -44,7 +40,6 @@ public class FutureOrderConsumerImpl implements FutureOrderConsumer {
     public void ratingsMessage(String message) {
         logger.info("CONSUMER receives message: " + message);
         Stocks stocks = stockServiceCacheImpl.getStocks();
-       // List<FutureOrder> orders = futureOrderService.findAllByStatus(Status.AWAIT);
         List<FutureOrder> orders = futureOrderService.findAllAwaited();
         List<FutureOrder> toAccept = filteredOrders(orders, stocks);
         logger.info("Total orders: " + orders.size() + " orders to accept: " + toAccept.size());
@@ -93,18 +88,7 @@ public class FutureOrderConsumerImpl implements FutureOrderConsumer {
                 result = details.getUnitPrice().compareTo(prices.getFor(TransactionType.SELL)) <= 0;
         }
         return result;
-
-        //return order.getTransactionDetails().getUnitPrice().compareTo(prices.getFor(order.getTransactionDetails().getTransactionType())) >= 1 /*0*order.getTransactionDetails().getTransactionType().mod*/;
     }
-
-//    public static TransactionDetails convert(FutureOrder order) {
-//        TransactionDetails details = new TransactionDetails();
-//        details.setCurrency(order.getCurrency());
-//        details.setTransactionType(order.getTransType());
-//        details.setUnitPrice(order.getRate());
-//        details.setTransUnits(order.getAmount().intValue());
-//        return details;
-//    }
 
     public static TransactionDetails convertWithActualPrices(FutureOrder order, Prices prices) {
         TransactionDetails old = order.getTransactionDetails();
@@ -115,12 +99,4 @@ public class FutureOrderConsumerImpl implements FutureOrderConsumer {
         actual.setTransUnits(old.getTransUnits());
         return actual;
         }
-
-//    public static Order convert(FutureOrder future, Prices prices) {
-//        Order order = new Order();
-//        order.setAmount(future.getAmount());
-//        order.setCurrency(future.getCurrency());
-//        order.setRate(prices.getFor(future.getTransType()));
-//        order.setType(future.getTransType());
-//    }
 }
